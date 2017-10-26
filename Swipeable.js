@@ -5,7 +5,7 @@
 // to move faster and fix possible issues quicker
 
 import React, { Component } from 'react';
-import { Animated, StyleSheet, View } from 'react-native';
+import { Animated, StyleSheet, View, Keyboard, StatusBar } from 'react-native';
 
 import {
   PanGestureHandler,
@@ -54,7 +54,7 @@ export default class Swipeable extends Component {
 
     this._onGestureEvent = Animated.event(
       [{ nativeEvent: { translationX: dragX } }],
-      { useNativeDriver: props.useNativeAnimations }
+      { useNativeDriver: props.useNativeAnimations, listener: (args) => console.log('listener', dragX) }
     );
   }
 
@@ -126,6 +126,7 @@ export default class Swipeable extends Component {
   };
 
   _onHandlerStateChange = ({ nativeEvent }) => {
+    console.log(nativeEvent)
     if (nativeEvent.oldState === State.ACTIVE) {
       this._handleRelease(nativeEvent);
     }

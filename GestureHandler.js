@@ -294,6 +294,10 @@ const PanGestureHandler = createHandler(
     minPointers: PropTypes.number,
     maxPointers: PropTypes.number,
     avgTouches: PropTypes.bool,
+    doLeft: PropTypes.bool,
+    doRight: PropTypes.bool,
+    doUp: PropTypes.bool,
+    doDown: PropTypes.bool
   },
   {}
 );

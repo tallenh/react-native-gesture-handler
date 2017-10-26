@@ -62,6 +62,10 @@ public class RNGestureHandlerModule extends ReactContextBaseJavaModule {
   private static final String KEY_PAN_MIN_POINTERS = "minPointers";
   private static final String KEY_PAN_MAX_POINTERS = "maxPointers";
   private static final String KEY_PAN_AVG_TOUCHES = "avgTouches";
+  private static final String KEY_PAN_DO_LEFT = "doLeft";
+  private static final String KEY_PAN_DO_RIGHT = "doRight";
+  private static final String KEY_PAN_DO_UP = "doUp";
+  private static final String KEY_PAN_DO_DOWN = "doDown";
 
   private abstract static class HandlerFactory<T extends GestureHandler>
           implements RNGestureHandlerEventDataExtractor<T> {
@@ -264,6 +268,21 @@ public class RNGestureHandlerModule extends ReactContextBaseJavaModule {
       }
       if (config.hasKey(KEY_PAN_AVG_TOUCHES)) {
         handler.setAverageTouches(config.getBoolean(KEY_PAN_AVG_TOUCHES));
+      }
+      if (config.hasKey(KEY_PAN_AVG_TOUCHES)) {
+        handler.setAverageTouches(config.getBoolean(KEY_PAN_AVG_TOUCHES));
+      }
+      if (config.hasKey(KEY_PAN_DO_DOWN)) {
+        handler.setDoDown(config.getBoolean(KEY_PAN_DO_DOWN));
+      }
+      if (config.hasKey(KEY_PAN_DO_UP)) {
+        handler.setDoUp(config.getBoolean(KEY_PAN_DO_UP));
+      }
+      if (config.hasKey(KEY_PAN_DO_LEFT)) {
+        handler.setDoLeft(config.getBoolean(KEY_PAN_DO_LEFT));
+      }
+      if (config.hasKey(KEY_PAN_DO_RIGHT)) {
+        handler.setDoRight(config.getBoolean(KEY_PAN_DO_RIGHT));
       }
     }
 

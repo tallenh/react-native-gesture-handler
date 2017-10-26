@@ -26,6 +26,11 @@ public class PanGestureHandler extends GestureHandler<PanGestureHandler> {
   private int mMinPointers = DEFAULT_MIN_POINTERS;
   private int mMaxPointers = DEFAULT_MAX_POINTERS;
 
+  private boolean mDoRight = true;
+  private boolean mDoLeft = true;
+  private boolean mDoUp = true;
+  private boolean mDoDown = true;
+
   private float mStartX, mStartY;
   private float mOffsetX, mOffsetY;
   private float mLastX, mLastY;
@@ -152,6 +157,26 @@ public class PanGestureHandler extends GestureHandler<PanGestureHandler> {
     return this;
   }
 
+  public PanGestureHandler setDoUp(boolean doUp) {
+    mDoUp = doUp;
+    return this;
+  }
+
+  public PanGestureHandler setDoDown(boolean doDown) {
+    mDoDown = doDown;
+    return this;
+  }
+
+  public PanGestureHandler setDoLeft(boolean doLeft) {
+    mDoLeft = doLeft;
+    return this;
+  }
+
+  public PanGestureHandler setDoRight(boolean doRight) {
+    mDoRight = doRight;
+    return this;
+  }
+
   /**
    * @param minVelocity in pixels per second
    */
@@ -172,9 +197,15 @@ public class PanGestureHandler extends GestureHandler<PanGestureHandler> {
 
   private boolean shouldActivate() {
     float dx = mLastX - mStartX + mOffsetX;
-    if (mMinDeltaX != MIN_VALUE_IGNORE && Math.abs(dx) >= mMinDeltaX) {
+
+    if (mMinDeltaX != MIN_VALUE_IGNORE && dx > 0 && Math.abs(dx) >= mMinDeltaX && mDoRight) {
       return true;
     }
+
+    if (mMinDeltaX != MIN_VALUE_IGNORE && dx < 0 && Math.abs(dx) >= mMinDeltaX && mDoLeft) {
+      return true;
+    }
+
     if (mMinOffsetX != MIN_VALUE_IGNORE &&
             ((mMinOffsetX < 0 && dx <= mMinOffsetX) || (mMinOffsetX >= 0 && dx >= mMinOffsetX))) {
       return true;
@@ -219,6 +250,10 @@ public class PanGestureHandler extends GestureHandler<PanGestureHandler> {
     if (mMaxDeltaX != MAX_VALUE_IGNORE && Math.abs(dx) > mMaxDeltaX) {
       return true;
     }
+
+//    if (mMinDeltaX != MIN_VALUE_IGNORE && dx < 0 && Math.abs(dx) >= mMinDeltaX && !mDoLeft) {
+//      return true;
+//    }
 
     float dy = mLastY - mStartY + mOffsetY;
     if (mMaxDeltaY != MAX_VALUE_IGNORE && Math.abs(dy) > mMaxDeltaY) {
