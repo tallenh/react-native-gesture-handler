@@ -54,7 +54,7 @@ export default class Swipeable extends Component {
 
     this._onGestureEvent = Animated.event(
       [{ nativeEvent: { translationX: dragX } }],
-      { useNativeDriver: props.useNativeAnimations, listener: (args) => console.log('listener', dragX) }
+      { useNativeDriver: props.useNativeAnimations }
     );
   }
 
@@ -126,7 +126,6 @@ export default class Swipeable extends Component {
   };
 
   _onHandlerStateChange = ({ nativeEvent }) => {
-    console.log(nativeEvent)
     if (nativeEvent.oldState === State.ACTIVE) {
       this._handleRelease(nativeEvent);
     }
